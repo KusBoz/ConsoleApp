@@ -4,6 +4,8 @@ int herohp = 100;
 const int Game_Delay = 1000;
 const int Crit_Multiplier = 2;
 
+SOMETHING_THAT_WONT_BUILD = 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
+
 const int Hero_Damage_MIN = 1;
 const int Hero_Damage_MAX = 20;
 const int Hero_Defense_MIN = 5;
