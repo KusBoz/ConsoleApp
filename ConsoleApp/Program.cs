@@ -17,10 +17,11 @@ const int Monster_Damage_MAX = 20;
 const int Monster_Defense_MIN = 5;
 const int Monster_Defense_MAX = 10;
 
-const int heroDef = dice.Next(Hero_Defense_MIN, Hero_Defense_MAX + 1);
-const int monsterDef = dice.Next(Monster_Defense_MIN, Monster_Defense_MAX + 1);
-
 Random dice = new();
+
+int heroDef = dice.Next(Hero_Defense_MIN, Hero_Defense_MAX + 1);
+int monsterDef = dice.Next(Monster_Defense_MIN, Monster_Defense_MAX + 1);
+
 
 while(monsterhp > 0 && herohp > 0)
 {
