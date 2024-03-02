@@ -1,19 +1,35 @@
 ﻿int monsterhp = 100;
 int herohp = 100;
 
-Random dice = new();
+const int Game_Delay = 1000;
+const int Crit_Multiplier = 2;
 
-int monsterDef = dice.Next(5,10);
-int heroDef = dice.Next(5,10);
+const int Hero_Damage_MIN = 1;
+const int Hero_Damage_MAX = 20;
+const int Hero_Defense_MIN = 5;
+const int Hero_Defense_MAX = 10;
+const int Hero_CritRoll_MIN = 1;
+const int Hero_CritRoll_MAX = 4;
+const int Hero_CritRoll_Jackpot = 4;
+
+const int Monster_Damage_MIN = 1;
+const int Monster_Damage_MAX = 20;
+const int Monster_Defense_MIN = 5;
+const int Monster_Defense_MAX = 10;
+
+const int heroDef = dice.Next(Hero_Defense_MIN, Hero_Defense_MAX + 1);
+const int monsterDef = dice.Next(Monster_Defense_MIN, Monster_Defense_MAX + 1);
+
+Random dice = new();
 
 while(monsterhp > 0 && herohp > 0)
 {
-    Thread.Sleep(1000);
-    int heroCritRoll = dice.Next(1,5);
-    int herodmg = dice.Next(1,21);
-    if (heroCritRoll == 4)
+    Thread.Sleep(Game_Delay);
+    int heroCritRoll = dice.Next(Hero_CritRoll_MIN, Hero_CritRoll_MAX + 1);
+    int herodmg = dice.Next(Hero_Damage_MIN, Hero_Damage_MAX + 1);
+    if (heroCritRoll == Hero_CritRoll_Jackpot)
     {
-        herodmg *= 2;
+        herodmg *= Crit_Multiplier;
         Console.WriteLine($"OMG hero hit critical!! {herodmg}");
     }
     int heroTD = Math.Max(herodmg - monsterDef, 0);
@@ -26,7 +42,7 @@ while(monsterhp > 0 && herohp > 0)
         break;
     }
 
-    int monsterdmg = dice.Next(1,21);
+    int monsterdmg = dice.Next(Monster_Damage_MIN, Monster_Damage_MAX + 1);
     int monsterTD = Math.Max(monsterdmg - heroDef, 0);
     herohp -= monsterTD;
     Console.WriteLine($"Monster hit {monsterdmg} but Hero resisted {heroDef}. \n Hero: {herohp}");
